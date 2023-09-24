@@ -292,6 +292,17 @@
                     <p class="paso"><span>Paso 4 </span> ¿Cuál es el riesgo que estas dispuesto a tomar?</p>
                     {% endif %}
 
+                    <p id="subtitulo">
+                        {% if language == 'english' %}
+
+                        Remember that the higher the risk, the higher the return.
+                        {% else %}
+                        Recuerda que a mayor riesgo, mayor rendimiento
+                        {% endif %}
+                    </p>
+
+                    <br>
+
                     <br>
                     {% if language == 'english' %}
                     <div class="circleUp" onclick="changeSizeAndText(3)" >Click Me</div>
