@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>INVIRTIENDO</title>
+    <!-- *BOOTSTRAP CSS INTERNO -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_any.css')}}">
+
+</head>
+
+<body onload="Inicio()">
+    <form action="/" method="POST">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-navbar-banorte ">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="."><img class="logo" src="." alt=""></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav  menu_header">
+                            <a
+                                href="https://www.banorte.com/wps/portal/ixe/Home/admininstra-tu-patrimonio/fondos-de-inversion">
+                                <img src="https://developers.banorte.com/themes/banorte_theme/assets/images/logo_banorte.png"
+                                    alt="">
+                            </a>
+                            <div id="headerBtns">
+                                <div class="dropdown">
+                                    <button class="btn btn-danger dropdown-toggle dpdown_header text-white"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {% if language == 'english' %}
+                                        Language
+                                        {% else %}
+                                        Idioma
+                                        {% endif %}
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        {% if language == 'english' %}
+                                        <li><a class="dropdown-item" href="{{ url_for('Invest_eng') }}">English</a></li>
+                                        <li><a class="dropdown-item" href="{{ url_for('Invest') }}">Spanish</a></li>
+                                        {% else %}
+                                        <li><a class="dropdown-item" href="{{ url_for('Invest') }}">Español</a></li>
+                                        <li><a class="dropdown-item" href="{{ url_for('Invest_eng') }}">Ingles</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div id="container">
+                <section id="paso1">
+                    <div style="text-align: center;" id="anyTitulo">
+
+                        <h1 class="gradientLyrics">{% if language == 'english' %}INVEST{% else %}INVIERTE{% endif %}
+                        </h1>
+
+                        {% if language == 'english' %}
+                        <h5>BANORTE helps you invest in your DREAMS</h5>
+                        {% else %}
+                        <h5><b>BANORTE</b> te ayuda a invertir en tus <b>SUEÑOS</b></h5>
+                        {% endif %}
+
+
+                    </div>
+                    <br><br>
+                    <p class="paso">
+                        {% if language == 'english' %}
+                        <span>Step 1.</span> Describe what you want to invest in
+                        {% else %}
+                        <span>Paso 1.</span> Describe en que quieres invertir
+                        {% endif %}
+                    </p>
+                    <div id="text-container">
+                        <div id="mainTextBox">
+                            <input type="hidden" name="form_name" value="keywordsForm">
+                            <input type="text" class="txt" id="descripcion" name="Description" {% if language=='english'
+                                %} placeholder="real estate, investment shares, ..." {% else %}
+                                placeholder="Bienes raíces, acciones, ..." {% endif %} />
+                            <!-- <a href="#paso2" id="botonTextBox"><img src="../img/arrow-forward-rounded.svg" alt=""></a> -->
+                        </div>
+                        <p class="numChar">
+                            {% if language == 'english' %}
+                            <span id="charCount"></span> / 50 characters
+                            {% else %}
+                            <span id="charCount"></span> / 50 caracteres
+                            {% endif %}
+                        </p>
+
+                        <a href="#paso2" class="boton">
+                            {% if language == 'english' %}
+                            Next
+                            {% else %}
+                            Siguiente
+                            {% endif %}
+                        </a>
+                    </div>
+                </section>
+
+                <section id="paso2">
+                    <p class="paso">
+                        <span>
+                            {% if language == 'english' %}
+                            Step 2.
+                            {% else %}
+                            Paso 2.
+                            {% endif %}
+                        </span>
+                        {% if language == 'english' %}
+                        Choose the term in which you would like to recover your investment
+                        {% else %}
+                        Elige el plazo en el que te gustaría recuperar tu inversión
+                        {% endif %}
+                    </p>
+
+
+                    <div class="container mb-5">
+                        <h3>
+                            {% if language == 'english' %}
+                            Selection bar
+                            {% else %}
+                            Barra de selección
+                            {% endif %}
+                        </h3>
+                        <!-- Utiliza el componente "input" de tipo "range" para crear la barra de selección -->
+                        <input type="range" class="form-range" id="nivelDeseo" name="nivelDeseo" min="0" max="2"
+                            step=".1">
+                        <!-- Agrega etiquetas debajo de la barra -->
+                        <div class="d-flex justify-content-between mt-5">
+                            <span>
+                                {% if language == 'english' %}
+                                short term (0-1 years)
+                                {% else %}
+                                Corto plazo (0-1 años)
+                                {% endif %}
+                            </span>
+                            <span>
+                                {% if language == 'english' %}
+                                Medium term (1-2 years)
+                                {% else %}
+                                Mediano plazo (1-2 años)
+                                {% endif %}
+                            </span>
+                            <span>
+                                {% if language == 'english' %}
+                                Large term (2+ years)
+                                {% else %}
+                                Largo plazo (2+ años)
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-center mt-5">
+                            <button type="button" class="btn boton" data-bs-toggle="modal"
+                                data-bs-target="#imageOfBanamex">
+
+                                {% if language == 'english' %}
+                                Check out our investment funds
+                                {% else %}
+                                Consulta nuestros fondos de inversión
+                                {% endif %}
+                            </button>
+
+                            <div class="modal justify-content-center" tabindex="-1" id="imageOfBanamex">
+                                <div class="modal-dialog modal-lg">
+                                    <!-- Agrega la clase 'modal-lg' para un modal grande -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">
+                                                {% if language == 'english' %}
+                                                Value proposition
+                                                {% else %}
+                                                Oferta de valor
+                                                {% endif %}
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body justify-content-center ">
+                                            <img src="https://www.banorte.com/cms/banorte/ahorroeInversion/Instrumentosdeinversion/FondosDeInversion/Tabla-Fondos-Preferente.png"
+                                                alt="" class="img-fluid">
+                                            <!-- Agrega la clase 'img-fluid' para que la imagen sea responsiva -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sigBack">
+                        <a href="#paso1" class="boton backBtn">
+                            {% if language == 'english' %}
+                            Back
+                            {% else %}
+                            Atrás
+                            {% endif %}
+                        </a>
+
+                        <a href="#paso3" class="boton">
+                            {% if language == 'english' %}
+                            Next
+                            {% else %}
+                            Siguiente
+                            {% endif %}
+                        </a>
+                    </div>
+                </section>
+
+
+                <section id="paso3" name="keywordsForm">
+
+                    {% if language == 'english' %}
+                    <p class="paso"><span>Step 3 </span>What is the purpose of your investment?</p>
+                    {% else %}
+                    <p class="paso"><span>Paso 3 </span>¿Cual es el objetivo de tu inversión?</p>
+                    {% endif %}
+
+                    <div class="divCircle">
+                        <div class="circle" id="c1" onclick="step4_clicPalabra('c1')">
+
+                            {% if language == 'english' %}
+                            <p id="c_op1">Growth</p>
+                            {% else %}
+                            <p id="c_op1">Crecimiento</p>
+                            {% endif %}
+                            <input type="hidden" name="keyword1" value="Crecimiento">
+                        </div>
+                        <div class="circle" id="c2" onclick="step4_clicPalabra('c2')">
+
+                            {% if language == 'english' %}
+                            <p id="c_op2">Experience</p>
+                            {% else %}
+                            <p id="c_op2">Experiencia</p>
+                            {% endif %}
+
+                            <input type="hidden" name="keyword2" value="Experiencia">
+                        </div>
+                    </div>
+                    <div class="divCircle">
+                        <div class="circle" id="c3" onclick="step4_clicPalabra('c3')">
+
+                            {% if language == 'english' %}
+                            <p id="c_op3" value="keywordsForm" name="keyword3">Diversification</p>
+                            {% else %}
+                            <p id="c_op3" value="keywordsForm" name="keyword3">Diversificación</p>
+                            {% endif %}
+                            <input type="hidden" name="keyword3" value="Diversificacion">
+                        </div>
+                        <div class="circle" id="c4" onclick="step4_clicPalabra('c4')">
+
+                            {% if language == 'english' %}
+                            <p id="c_op4" value="keywordsForm" name="keyword4">Flexibility</p>
+                            {% else %}
+                            <p id="c_op4" value="keywordsForm" name="keyword4">Flexibilidad</p>
+                            {% endif %}
+                            <input type="hidden" name="keyword4" value="Flexibilidad">
+                        </div>
+                    </div>
+
+                    <div class="sigBack">
+                        <a href="#paso2" class="boton backBtn ">
+                            {% if language == 'english' %}
+                            Back
+                            {%else%}
+                            Atrás
+                            {% endif %}
+                        </a>
+                        <a href="#paso4" id="add-button" class="boton">
+                            {% if language == 'english' %}
+                            Next
+                            {%else%}
+                            Siguiente
+                            {% endif %}
+                        </a>
+                    </div>
+
+                </section>
+
+                <section id="paso4">
+                    {% if language == 'english' %}
+                    <p class="paso"><span>Step 4 </span> What risk are you willing to take?</p>
+                    {% else %}
+                    <p class="paso"><span>Paso 4 </span> ¿Cuál es el riesgo que estas dispuesto a tomar?</p>
+                    {% endif %}
+
+                    <br>
+                    {% if language == 'english' %}
+                    <div class="circleUp" onclick="changeSizeAndText(3)" >Click Me</div>
+                    <script src="script_any.js"></script>
+                    {% else %}
+                    <div class="circleUp" onclick="changeSizeAndText(0)"  >Dame Click</div>
+                    <script src="script_any.js"></script>
+                    {% endif %}
+                    <br>
+
+
+                    <div class="sigBack smtdiv">
+                        <a href="#paso3" class="boton backBtn ">{% if language == 'english' %}Back{% else %}Atrás{%
+                            endif %}</a>
+                        <!--<a href="#resultado" id="add-button" class="boton">Generar</a>-->
+                        <input type="hidden" name="language" value="{{ language }}">
+                        <input type="hidden" name="source_page" value="INVEST.html">
+                        <input type="submit" id="add-button" class="boton"
+                            value="{% if language == 'english' %}Generate{% else %}Generar{% endif %}">
+                    </div>
+                </section>
+
+                <section id="resultado">
+                    <p class="paso">
+                        <span>{% if language == 'english' %}Your stimation is ready{% else %}Tu estimación está lista{%
+                            endif %}</span>
+                        <br>
+                    </p>
+                    <div id="instaPost">
+                        {% if result %}
+                        <p id="chatGPTAnswer">
+                            {{ result | safe}}
+                        </p>
+                        {% endif %}
+                    </div>
+                    {% if error %}
+                    <h3>{{ error }} </h3>
+                    {% endif %}
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </form>
+
+    <!-- <button id="delete-button">DeleteImg</button> -->
+
+
+    {% if fileName %}
+    <!-- <h1>Filename: {{ fileName }}</h1> -->
+    <script>
+        /*
+                                                                                                                                                                                                                                                                                                                                                                                window.addEventListener('DOMContentLoaded', function() {
+                                                                                                                                                                                                                                                                                                                                                                                    // Add event listener to the delete button
+                                                                                                                                                                                                                                                                                                                                                                                    var deleteButton = document.getElementById('delete-button');
+                                                                                                                                                                                                                                                                                                                                                                                    deleteButton.addEventListener('click', function() {
+                                                                                                                                                                                                                                                                                                                                                                                        var filename = "{{ fileName }}";  // Replace with the actual filename
+                                                                                                                                                                                                                                                                                                                                                                                        console.log(filename);
+
+                                                                                                                                                                                                                                                                                                                                                                                        fetch('/delete_image', {
+                                                                                                                                                                                                                                                                                                                                                                                            method: 'POST',
+                                                                                                                                                                                                                                                                                                                                                                                            headers: {
+                                                                                                                                                                                                                                                                                                                                                                                                'Content-Type': 'application/x-www-form-urlencoded'
+                                                                                                                                                                                                                                                                                                                                                                                            },
+                                                                                                                                                                                                                                                                                                                                                                                            body: 'filename=' + filename
+                                                                                                                                                                                                                                                                                                                                                                                        })
+                                                                                                                                                                                                                                                                                                                                                                                        .then(function(response) {
+                                                                                                                                                                                                                                                                                                                                                                                            // Handle the response
+                                                                                                                                                                                                                                                                                                                                                                                            if (response.ok) {
+                                                                                                                                                                                                                                                                                                                                                                                                console.log('Image deleted successfully');
+                                                                                                                                                                                                                                                                                                                                                                                            } else {
+                                                                                                                                                                                                                                                                                                                                                                                                console.error('Failed to delete image');
+                                                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                                        })
+                                                                                                                                                                                                                                                                                                                                                                                        .catch(function(error) {
+                                                                                                                                                                                                                                                                                                                                                                                            console.error('An error occurred:', error);
+                                                                                                                                                                                                                                                                                                                                                                                        });
+                                                                                                                                                                                                                                                                                                                                                                                    });
+                                                                                                                                                                                                                                                                                                                                                                                });
+                                                                                                                                                                                                                                                                                                                                                                                */
+
+        /*
+        function downloadImage() {
+            var link = document.createElement('a');
+            link.href = '{{ imagePath }}';
+            link.download = 'download.png';
+            link.click();
+        }
+        */
+
+        window.addEventListener('beforeunload', function () {
+            var filename = "{{ fileName }}"; // Replace with the actual filename
+            console.log(filename);
+
+            fetch('/delete_image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'filename=' + filename
+            })
+                .then(function (response) {
+                    // Handle the response
+                    if (response.ok) {
+                        console.log('Image deleted successfully');
+                    } else {
+                        console.error('Failed to delete image');
+                    }
+                })
+                .catch(function (error) {
+                    console.error('An error occurred:', error);
+                });
+        });
+    </script>
+    {% endif %}
+
+    <!-- *BOOTSTRAP JS INTERNO -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}} "></script>
+    <script src="{{ url_for('static', filename='js/script_any.js')}} "></script>
+    <!-- <script src="../js/script.js "></script> -->
+
+</body>
+
+
+
+</html>
+
+<ul id="color-list "></ul>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- *BOOTSTRAP CSS INTERNO -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_index.css')}}">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-navbar-banorte " >
+            <div class="container-fluid" >
+                <a class="navbar-brand" href="."><img class="logo" src="." alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav  menu_header">
+                        <a href="https://www.banorte.com/wps/portal/ixe/Home/admininstra-tu-patrimonio/fondos-de-inversion">
+                            <img src="https://developers.banorte.com/themes/banorte_theme/assets/images/logo_banorte.png" alt="">
+                        </a>
+                        <div id="headerBtns">
+                            <div class="dropdown">
+                                <button class="btn btn-danger dropdown-toggle dpdown_header text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {% if language == 'english' %}
+                                        Language
+                                    {% else %}
+                                        Idioma
+                                    {% endif %}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    {% if language == 'english' %}
+                                    <li><a class="dropdown-item" href="{{ url_for('landingPage_eng') }}">English</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('landingPage') }}">Spanish</a></li>
+                                    {% else %}
+                                    <li><a class="dropdown-item" href="{{ url_for('landingPage') }}">Español</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('landingPage_eng') }}">Ingles</a></li>
+                                    {% endif %}
+                                </ul>
+
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="titulo" >
+            <div id="anyTitulo">
+                <h1 class="gradientLyrics">{% if language == 'english' %}INVEST{% else %}INVIERTE{% endif %}</h1>
+            </div>
+            <p class="paso">{% if language == 'english' %}Decide to invest the way you want and whenever.{% else %}Decide invertir cuando quieras y como quieras.{% endif %}</p>
+            <a class="list_item_header main_boton" aria-current="page" {% if language=='english' %} href="{{ url_for('Invest_eng') }}" {% else %} href="{{ url_for('Invest') }}" {% endif %}>
+                {% if language == 'english' %}
+            Try Invest
+            {% else %}
+            Probar Invierte
+            {% endif %}
+            </a>
+        </section>
+
+        <section id="solo4pasos">
+            <div>
+                <h2>{% if language == 'english' %}INVEST is the perfect coach to decide how to invest in just <span>4 steps</span>{% else %}INVIERTE es el coach perfecto para decidir como invertir en solo <span>4 pasos</span>{% endif %}</h2>
+            </div>
+            <div class="pasosLanding">
+                <div class="stepLand">
+                    <img src="{{ url_for('static', filename='img/emojione-monotone_letter-a.svg')}}" alt="">
+                    <h5>{% if language == 'english' %}Description{% else %}Descripción{% endif %}</h5>
+                </div>
+                <div class="stepLand">
+                    <img src="{{ url_for('static', filename='img/term.svg')}}" alt="">
+                    <h5>{% if language == 'english' %}Term{% else %}Plazo{% endif %}</h5>
+                </div>
+                <div class="stepLand">
+                    <img src="{{ url_for('static', filename='img/objective.svg')}}" alt="">
+                    <h5>{% if language == 'english' %}Objective{% else %}Objetivo{% endif %}</h5>
+                </div>
+                <div class="stepLand">
+                    <img src="{{ url_for('static', filename='img/risk.svg')}}" alt="">
+                    <h5>{% if language == 'english' %}Risk{% else %}Riesgo{% endif %}</h5>
+                </div>
+            </div>
+        </section>
+
+        <section id="cualquier">
+            <img src="{{ url_for('static', filename='img/index/mundo.svg')}}" alt="">
+            <h2>{% if language == 'english' %}With <span>INVEST</span>, anyone from anywhere can design his investing way.{% else %}Con <span>INVIERTE</span>, cualquiera desde cualquier lugar puede diseñar su modo de inversión.{% endif %}</h2>
+        </section>
+    </main>
+
+    <footer class="bg-navbar-banorte">
+        <a class="list_item_header" aria-current="page" href=""> <img src="https://developers.banorte.com/themes/banorte_theme/assets/images/logo_banorte.png" alt=""></a>
+    </footer>
+
+
+    <!-- *BOOTSTRAP JS INTERNO -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</body>
+
+</html>
